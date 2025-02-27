@@ -90,5 +90,14 @@ plt.savefig("gyümölcsök_oszlopdiagramm.png")
 # A semmit 0-val, a robot 1-gyel, az őzeket 2-vel jelöljük
 # egy cellán 85% eséllyel nincs semmi, 5% robot, 10% eséllyel őz
 
+map = np.random.choice([0,1,2], size = (15,15), p = [0.85, 0.05, 0.1])
 
 #b, jelenítsük meg ezt a matrixot matplotlibbel, használd az imshow metódust
+
+from matplotlib.colors import LinearSegmentedColormap
+
+plt.close() # Az előző plot nem volt megjelenítve, ezért vegyült a 2
+my_cmap = LinearSegmentedColormap.from_list("custom", ["gray", "black", "green"])
+plt.imshow(map, cmap=my_cmap)
+plt.axis("off")
+plt.show()
