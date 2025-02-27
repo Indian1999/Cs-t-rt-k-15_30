@@ -83,3 +83,12 @@ plt.grid(True)
 plt.yticks([i for i in range(0, 50, 2)])
 plt.ylim([0, max(counts)])
 plt.savefig("gyümölcsök_oszlopdiagramm.png")
+
+# Numpy könyvtárat használva, generáljuk le a következőt:
+# legyen egy 15 * 15 mátrixunk, amin, robotok és őzek helyezkednek el
+# egy cellán, lehet, robot, őz, vagy semmi
+# A semmit 0-val, a robot 1-gyel, az őzeket 2-vel jelöljük
+# egy cellán 85% eséllyel nincs semmi, 5% robot, 10% eséllyel őz
+
+
+#b, jelenítsük meg ezt a matrixot matplotlibbel, használd az imshow metódust
