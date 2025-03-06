@@ -35,6 +35,35 @@ def squared_numbers(num = None):
         while True:
             yield i**2
             i += 1
+    else:
+        i = 1
+        while i <= num:
+            yield i**2
+            i += 1
+            
+for i in squared_numbers(20):
+    print(i, end=" ")
+print()
+            
+for i in squared_numbers():
+    print(i, end=" ")
+    if i > 10000:
+        break # Hogyha ezt kiadjuk egy cikluson belól, akkor leáll a ciklus
+print()
+
+# Készítsünk egy generátor függvényt, ami a prímszámokat sorolja fel
+
+def is_prime(num):
+    pass
+
+def generate_primes(num):
+    primes = []
+    i = 2
+    while len(primes) < num:
+        if is_prime(i):
+            primes.append(i)
+        
+
 # ciklusvezérlő kulcsszavak (break, continue)
 
 # ciklusok else ága
