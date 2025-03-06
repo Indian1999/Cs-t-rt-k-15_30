@@ -54,7 +54,11 @@ print()
 # Készítsünk egy generátor függvényt, ami a prímszámokat sorolja fel
 
 def is_prime(num):
-    pass
+    prime = True
+    for i in range(2, num):
+        if num % i == 0:
+            prime = False
+    return prime
 
 def generate_primes(num):
     primes = []
@@ -62,7 +66,14 @@ def generate_primes(num):
     while len(primes) < num:
         if is_prime(i):
             primes.append(i)
+            yield i
+        i += 1
+            
+for i in generate_primes(30):
+    print(i, end= " ")
+print()
         
+
 
 # ciklusvezérlő kulcsszavak (break, continue)
 
