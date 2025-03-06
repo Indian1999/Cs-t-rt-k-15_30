@@ -140,5 +140,65 @@ while prime:
     prime = False
 
 print(prime)
-# ciklusok else ága
 
+# ciklusok else ága (Python exclusive)
+
+for i in range(5):
+    print(i, end = " ")
+else:
+    print("Ez itt a for ciklus else ága")
+    
+    
+logic_value = False
+while logic_value:
+    print("szia")
+else:
+    print("Ez itt a while ciklus else ága")
+    
+# Az else ág akkor fut le, hogyha természetes módon léptünk ki a ciklusból
+# azaz, abban az esetben, ha breakkel lépünk ki, nem fog lefutni
+
+for i in range(10):
+    if i == 5:
+        break
+else:
+    print("Ez az else ág nem fog lefutni")
+    
+
+# 5 db #
+i = 1
+while i < 10: # 1, 2, 4, 8, else
+    print("#", end="")
+    i *= 2
+else:
+    print("#", end="")
+print()
+
+# 7 db #
+i = 0
+while i < 20: # 0, 1, 2, 3, 4, 5, 6
+    if i == 7:
+        break
+    print("#", end = "")
+    i += 1
+else:
+    print("#", end="")
+print()
+
+def fakt(num):
+    result = 1
+    run = True
+    while run:
+        if type(num) != int or num < 0:
+            break
+        result *= num
+        if num == 1:
+            run = False
+        num -= 1
+    else:
+        return result
+    
+print(fakt("kiscica"))
+print(fakt(-5))
+print(fakt(3.14))
+print(fakt(6))
