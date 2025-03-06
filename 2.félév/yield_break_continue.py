@@ -73,9 +73,72 @@ for i in generate_primes(30):
     print(i, end= " ")
 print()
         
+# 1. feladat: Írjunk egy függvényt ami felsorolja a számokat 1-től 100-ig, amik 7-tel oszthatóak
+def generate_div_sevens():
+    for i in range(1, 101):
+        if i % 7 == 0:
+            yield i
 
+for i in generate_div_sevens():
+    print(i, end= " ")
+print()
+# 2. feladat: Írjunk egy függvényt, ami a-tól b-ig felsorolja az m-mel osztható számokat
+def divisors_from_to(a, b, m):
+    for i in range(a, b):
+        if i % m == 0:
+            yield i
 
+for i in divisors_from_to(3422, 4523, 73):
+    print(i, end= " ")
+print()
+
+# 3. feladat: Írjunk egy függvényt ami felsorolja az alábbi sorozat elemeit:
+# a(n) = n*2 + 3
+
+def generate_an(num):
+    n = 1
+    for i in range(1, num+1):
+        yield i *2 + 3
+        
+for i in generate_an(15):
+    print(i, end= " ")
+print()
+
+# 4. feladat: Írjunk egy függvényt ami felsorolja a fibonacci sorozat elemeit:
+# 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ... 
+
+def fib_generator():
+    a = 1
+    b = 1
+    while True:
+        yield a
+        c = a + b
+        a = b
+        b = c
+
+for i in fib_generator():
+    print(i, end=" ")
+    if i > 2000:
+        break
+print()
 # ciklusvezérlő kulcsszavak (break, continue)
+for i in range(10):
+    if i % 3 == 0:
+        continue   # A következő ciklus iterációra ugrik (minden ami utána jönne, kihagyja)
+    print(i, end = " ")
+print()
 
+num = 49
+divisor = 2
+prime = True
+while prime:
+    if num == divisor:
+        break
+    if num % divisor != 0:
+        divisor += 1
+        continue
+    prime = False
+
+print(prime)
 # ciklusok else ága
 
