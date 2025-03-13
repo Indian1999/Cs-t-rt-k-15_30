@@ -108,4 +108,13 @@ plt.tight_layout()
 plt.savefig("2.félév/Képek/4d6_probability.png")
 plt.close()
 
-    
+
+# egy 6 oldalú és 12 oldalú dobókockával dobunk, melyik dobásnak mennyi a valószínűsége?
+dice = [[i+j for j in range(1,7)] for i in range(1,13)]
+dice = np.array(dice)
+unique, counts = np.unique(dice, return_counts=True)
+plt.bar(unique, counts)
+plt.title("D6 és D12 dobás esélyei")
+plt.xticks(unique)
+plt.savefig("2.félév/Képek/d6_d12_probability.png")
+plt.close()
