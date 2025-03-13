@@ -1,4 +1,6 @@
 import random
+import matplotlib.pyplot as plt
+import numpy as np
 
 def generate_2d_matrix(n:int, m:int) -> list[list[int]]:
     """
@@ -64,8 +66,20 @@ for row in dice_matrix:
     print(row)
     
 # 4 dobókockával dobunk egyszerre
-# Mennyi a valószínűsége, hogy a dobás eredménye 4?
+# Mennyi a valószínűsége, hogy a dobás eredménye 7?
 
 four_dice = [[[[i+j+k+l for l in range(1,7)] for k in range(1,7)] for j in range(1,7)] for i in range(1,7)]
+
+counter= 0
+for i in range(6):
+    for j in range(6):
+        for k in range(6):
+            for l in range(6):
+                if four_dice[i][j][k][l] == 7:
+                    counter += 1
+összes = 6**4
+#Valószínűség = kedvező/összes
+# Kedvező: a dobások összege: 7
+print(f"A 7-es dobásának valószínűsége 4 dobókockával: {round(counter/összes, 4) * 100}%")                    
 
     
