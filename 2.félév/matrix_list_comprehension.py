@@ -80,6 +80,28 @@ for i in range(6):
 összes = 6**4
 #Valószínűség = kedvező/összes
 # Kedvező: a dobások összege: 7
-print(f"A 7-es dobásának valószínűsége 4 dobókockával: {round(counter/összes, 4) * 100}%")                    
+print(f"A 7-es dobásának valószínűsége 4 dobókockával: {round(counter/összes, 4) * 100}%")     
+
+x = np.array([i for i in range(4, 25)])
+y = []
+for num in x:
+    counter= 0
+    for i in range(6):
+        for j in range(6):
+            for k in range(6):
+                for l in range(6):
+                    if four_dice[i][j][k][l] == num:
+                        counter += 1
+    összes = 6**4  
+    y.append(counter/összes)
+y = np.array(y)
+y = 100 * y
+plt.bar(x, y)
+plt.xlabel("4 dobás összege")
+plt.ylabel("Százalék")
+plt.xlim([3.5, 24.5])
+plt.xticks(x)
+plt.grid()
+plt.show()
 
     
