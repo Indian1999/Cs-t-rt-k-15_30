@@ -62,5 +62,10 @@ print(lista)
 dice_matrix = [[i + j for j in range(1,7)] for i in range(1, 7)]
 for row in dice_matrix:
     print(row)
+    
+# 4 dobókockával dobunk egyszerre
+# Mennyi a valószínűsége, hogy a dobás eredménye 4?
+
+four_dice = [[[[i+j+k+l for l in range(1,7)] for k in range(1,7)] for j in range(1,7)] for i in range(1,7)]
 
     
