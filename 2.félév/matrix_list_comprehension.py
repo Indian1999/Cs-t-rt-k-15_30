@@ -19,5 +19,20 @@ matrix = generate_2d_matrix(3,8)
 for row in matrix:
     print(row)
     
+    
+matrix = [[random.randint(-20, 100) for j in range(8)] for i in range(5)] 
+for row in matrix:
+    print(row)
+    
+összeg = 0
+for i in range(len(matrix)): # sorok számáig megy
+    for j in range(len(matrix[i])): # oszlopok számáig
+        összeg += matrix[i][j]
+print("A mátrix elemeinek az összege:", összeg)
+
+# 1. feladat: Írjuk ki a legkisebb számot a mátrixban
+
+# 2. feladat: Adjuk meg, hogy hány negatív szám van a mátrixban
+    
 
     
