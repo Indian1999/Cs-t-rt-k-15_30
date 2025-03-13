@@ -101,7 +101,11 @@ plt.xlabel("4 dobás összege")
 plt.ylabel("Százalék")
 plt.xlim([3.5, 24.5])
 plt.xticks(x)
-plt.grid()
-plt.show()
+plt.yticks([i for i in range(int(max(y) + 1))])
+plt.grid(axis="y", alpha=0.6, linestyle = "--")
+plt.title("4 db D6 kocka valószínűségei")
+plt.tight_layout()
+plt.savefig("2.félév/Képek/4d6_probability.png")
+plt.close()
 
     
