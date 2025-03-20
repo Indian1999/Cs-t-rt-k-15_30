@@ -9,3 +9,7 @@ lista = MyPackage.names[:10]
 print(lista)
 
 print("Az 5 egység sugarú kör területe:", MyPackage.pi * 5**2)
+
+# Döntsük el egy szövegről, hogy palindróm-e
+
+szöveg = "görög"
