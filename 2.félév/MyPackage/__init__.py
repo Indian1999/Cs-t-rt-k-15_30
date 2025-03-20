@@ -2,3 +2,4 @@
 print("Sikeresen importáltad ezt: MyPackage")
 
 from .functions import * # functions scriptből importáljunk be mindent
+from .data import *
