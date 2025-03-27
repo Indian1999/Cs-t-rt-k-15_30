@@ -65,7 +65,35 @@ def solve():
             board[empty[0]][empty[1]] = 0
     return False
 
+# A játékos kiválaszthat egy cellát, és arra a cellára beírhat egy számot
+# (bónusz) Ez megy egészen addig, amíg készen nem lesz a sudoku (Ehez egy új függvény is kéne)
+# A játékosnak ajánljuk fel minden lépésnél, hogy szabad-e a gazda, ilyenkor a szg. kitölti a sudokut
+
+def completed():
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == 0:
+                return False
+    if not is_valid(board[0][0], (0,0)):
+        return False
+    return True
+
+gameOn = True
+while gameOn:
+    print_board()
+    bemenet = input("Adj meg 3 számot! (sor, oszlop, szám), ha szabad a gazda: solve\n")
+    if bemenet == "solve":
+        solve()
+        gameOn = False
+    else:
+        bemenet_split = bemenet.split(" ") # ["2", "3", "1"]
+        sor = int(bemenet_split[0]) - 1
+        oszlop = int(bemenet_split[1]) - 1
+        num = int(bemenet_split[2])
+        board[sor][oszlop] = num
+        if completed():
+            gameOn = False
+            print("Szép volt!")
+        
 print_board()
-solve()
-print("\n"*2)
-print_board()
+        
