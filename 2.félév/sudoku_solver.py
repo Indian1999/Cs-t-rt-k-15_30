@@ -21,5 +21,14 @@ def print_board():
             output += str(board[i][j]) + " "
         print(output)
         
+def find_empty():
+    """
+    Visszaadja a legelső üres cella sor-oszlop indexét
+    """
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == 0:
+                return (i, j) # 2 elemeű tuple, a sor és oszlop indexekkel.
         
 print_board()
+find_empty()
