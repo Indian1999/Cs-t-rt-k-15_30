@@ -29,6 +29,29 @@ def find_empty():
         for j in range(len(board[i])):
             if board[i][j] == 0:
                 return (i, j) # 2 elemeű tuple, a sor és oszlop indexekkel.
-        
+       
+def is_valid(num: int, pos: tuple) -> bool:
+    """
+    Megnézi, hogy amennyiben a num-ot beírnánk az adott pozícióra, akkor valid marad-e a tábla. True vagy False értékkel tér vissza.
+    """ 
+    #Sor ellenőrzése:
+    for j in range(9):
+        if board[pos[0]][j] == num and pos[1] != j:
+            return False
+    #Oszlop ellenőrzése:
+    for i in range(9):
+        if board[i][pos[1]] == num and pos[0] != i:
+            return False
+    #A kis négyzet ellenőrzése:
+    box_x = pos[1] // 3 * 3
+    box_y = pos[0] // 3 * 3
+    for i in range(box_y, box_y + 3):
+        for j in range(box_x, box_x + 3):
+            if board[i][j] == num and (i, j) != pos:
+                return False
+    return True
+            
+    
+    
 print_board()
-find_empty()
+is_valid()
