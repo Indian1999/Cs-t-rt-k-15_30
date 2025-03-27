@@ -50,8 +50,22 @@ def is_valid(num: int, pos: tuple) -> bool:
             if board[i][j] == num and (i, j) != pos:
                 return False
     return True
-            
-    
-    
+
+def solve():
+    empty = find_empty()
+    if empty == None:
+        return True
+    else:
+        row, col = empty
+    for num in range(1, 10):
+        if is_valid(num, empty):
+            board[empty[0]][empty[1]] = num
+            if solve():
+                return True
+            board[empty[0]][empty[1]] = 0
+    return False
+
 print_board()
-is_valid()
+solve()
+print("\n"*2)
+print_board()
