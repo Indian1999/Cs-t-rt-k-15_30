@@ -74,5 +74,43 @@ if num & 1 == 0:
     print("Páros")
 else:
     print("Páratlan")
+    
+# Valahány GigaBytot váltsunk át TB-ba, MB-ba, KB-ba és B, valamint bitekbe
+# 1 Byte = 8 bit ( 1 bit pedig 1 db 1-es vagy 0-s)
+# 1 KiloByte = 1024 Byte
+# 1 MegaByte = 1024 KiloByte
+# 1 GigaByte = 1024 MegaByte
+# 1 TeraByte = 1024 Gigabyte
+# 1 PetaByte = 1024 TeraByte
+# 1024 = 2^10
 
+giga = int(input("Add meg a GigaByte-ok számát!\n"))
+mega  = giga << 10
+kilo  = giga << 20
+bytes = giga << 30
+bits  = giga << 33
+tera  = giga >> 10
+print(f"{giga} GB = {bits} bits")
+print(f"{giga} GB = {bytes} B")
+print(f"{giga} GB = {kilo} KB")
+print(f"{giga} GB = {mega} MB")
+print(f"{giga} GB = {tera} TB")
+
+# IP címes feladat: Egy kliens IP címe és a hálózati maszk alapján, határozzuk meg
+# a hálózat IP címét
+#   IPv4 Address. . . . . . . . . . . : 192.168.44.135(Preferred)
+#   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+
+# Ha az IP címünket összeéseljük a hálózati maszkkal, megkapjuk a hálózat IP címét
+ip1 = 192
+ip2 = 168
+ip3 = 44
+ip4 = 135
+mask1 = 255
+mask2 = 255
+mask3 = 0
+mask4 = 0
+print(f"IP cím: {ip1}.{ip2}.{ip3}.{ip4}")
+print(f"Hálózati maszk: {mask1}.{mask2}.{mask3}.{mask4}")
+print(f"Hálózati cím: {ip1 & mask1}.{ip2 & mask2}.{ip3 & mask3}.{ip4 & mask4}")
 
