@@ -53,3 +53,26 @@ print(num1 & num2) # 8   # ÉS
 print(num1 | num2) # 127 # alt gr + w -> |   VAGY
 print(num1 ^ num2) # 119 # alt gr + 3 -> ^   KIZÁRÓ VAGY
 
+# Balra / Jobbra shiftelés
+#       1110011 << 2 (Balra shiftelés 2-vel) [115]
+# ->  111001100 [460] 460 = 115 * 2 * 2 = 230 * 2
+
+#       1110011 >> 3 (Jobbra shiftelés 3-mal) [115]
+# ->       1110 [14] 115 // 2 // 2 // 2 = 57 // 2 // 2 = 28 // 2 = 14
+
+# Szorozzunk be egy számot 4 alkalommal 2-vel
+num = 13
+print(num << 4)
+print(num * 2 * 2 * 2 * 2)
+
+# Döntsük el, hogy egy szám osztható-e 2-vel
+
+# 13 = 1101
+#  1 = 0001
+#  & = 0001
+if num & 1 == 0:
+    print("Páros")
+else:
+    print("Páratlan")
+
+
