@@ -10,7 +10,8 @@ print(type(binary))     # <class 'str'>
 # Gyakran kellhet, hogy 0b nélkül jelenítsük meg a számot
 print(binary[2:])       # 110110
 
-binary = input("Adj meg egy 2-es számrendszer-beli számot!\n")
+#binary = input("Adj meg egy 2-es számrendszer-beli számot!\n")
+binary = "1111"
 decimal = int(binary, 2)
 print(decimal)
 
@@ -37,12 +38,18 @@ print(valami)
 # 11100011 -> E3
 
 
-hexa = input("Adj meg egy 16-os számrendszer-beli számot!\n")
+#hexa = input("Adj meg egy 16-os számrendszer-beli számot!\n")
+hexa = "FFF"
 decimal = int(hexa, 16)
 print(decimal)
 
 # Hearthstone-ban ha egy minion élete 2 147 483 648 fölé megy, akkor meghal
 # Ennek az az oka, hogy a minion élete egy 32 bites integer
 
+num1 = 63
+num2 = 72
 
+print(num1 & num2) # 8   # ÉS
+print(num1 | num2) # 127 # alt gr + w -> |   VAGY
+print(num1 ^ num2) # 119 # alt gr + 3 -> ^   KIZÁRÓ VAGY
 
