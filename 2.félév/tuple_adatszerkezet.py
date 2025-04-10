@@ -114,3 +114,44 @@ for i in range(len(myTuple)):
         darab += 1
         
 print("Az elemek átlaga:", round(összeg / darab, 2))
+
+# 5. feladat: Fordítsuk meg a tuple elemeit
+myTuple = (5, 7, 8, 9, 3, 7) # -> (7, 3, 9, 8, 7, 5)
+
+new_tuple = []
+for i in range(len(myTuple)-1, -1, -1):
+    new_tuple.append(myTuple[i])
+new_tuple = tuple(new_tuple)
+print(new_tuple)
+
+new_tuple = new_tuple[::-1]
+print(new_tuple)
+
+# 6. feladat: Ugyan ennek a tuple-nek vágjuk le az első és utolsó elemét, 
+# majd mentsük el egy új tuple-be (7, 8, 9, 3)
+
+new_tuple = myTuple[1:-1]
+print(new_tuple)
+
+# 7. feladat: Határozzuk meg, hogy egy tuple-ben melyik indexen található 
+# az első 2 jegyű szám
+myTuple = (4, 8, 9, 123, 7, 12, 8) # -> 5. index
+i = 0
+while i < len(myTuple):
+    if myTuple[i] >= 10 and myTuple[i] <= 99:
+        break
+    i += 1
+if i == len(myTuple):
+    print("Nincs benne kétjegyú szám.")
+else:
+    print(f"Az első kétjegyű szám a {i}. indexen található.")
+
+# 8. feladat: Számoljuk ki vektorok műveletének eredményét
+a = (3, 5)
+b = (-1, 3)
+c = (2, -1)
+# Határozzuk meg az    a + 2b - 3c vektort
+# (3,5) + 2 * (-1,3) - 3 * (2, -1) = (3,5) + (-2, 6) - (6, -3) = (-5, 14)
+
+v = (a[0] + 2 * b[0] - 3 * c[0], a[1] + 2 * b[1] - 3 * c[1])
+print(v)
