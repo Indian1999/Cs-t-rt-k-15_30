@@ -113,4 +113,3 @@ mask4 = 0
 print(f"IP cím: {ip1}.{ip2}.{ip3}.{ip4}")
 print(f"Hálózati maszk: {mask1}.{mask2}.{mask3}.{mask4}")
 print(f"Hálózati cím: {ip1 & mask1}.{ip2 & mask2}.{ip3 & mask3}.{ip4 & mask4}")
-
