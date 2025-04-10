@@ -56,3 +56,38 @@ tuple4 = (4,5,6)
 print(tuple1 == tuple2) # False
 print(tuple1 == tuple3) # False
 print(tuple2 == tuple4) # True
+
+print("tuple1 * 3 =", tuple1 * 3) # (1, 2, 3, 1, 2, 3, 1, 2, 3)
+#print("tuple1 + 3 =", tuple1 + 3) # TYPE ERROR - int-et nem adhatok hozzá tuplehöz
+print("tuple1 + tuple2 =", tuple1 + tuple2) # (1, 2, 3, 4, 5, 6)
+
+def minimum(lista):
+    min_index = 0
+    for i in range(len(lista)):
+        if lista[i] < lista[min_index]:
+            min_index = i
+    return (lista[min_index], min_index) # tuple
+
+lista = [9, 2, 1, 6, -2, 6, -5, 6, 9, 1]
+
+legkisebb = minimum(lista)
+print(legkisebb) # (-5, 6)
+
+min_value, min_index = minimum(lista)
+print(min_value) # -5
+print(min_index) # 6
+
+
+import random
+# 1. feladat: Szerepel-e a tuple-ben a 7-es szám?
+myTuple = tuple(random.randint(1, 10) for i in range(5))
+print(myTuple)
+
+# 2. feladat: Határozzuk meg a tuple elemeinek összegét
+
+# 3. feladat: Töröljük a listából azokat az elemeket amik nem tuple-ök
+lista = [5, (3, 2, 1), 4.13, ("asd", "fa"), "cica", True, None, (1, "egy almafa")]
+
+# 4. feladat: Határozzuk meg a tuple elemeinek az átlagát
+myTuple = ((1,2,3), (43, 13), (9, 3, 8), (20, 40, 60))
+print(myTuple)
