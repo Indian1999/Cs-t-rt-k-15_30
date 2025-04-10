@@ -82,12 +82,35 @@ import random
 # 1. feladat: Szerepel-e a tuple-ben a 7-es szám?
 myTuple = tuple(random.randint(1, 10) for i in range(5))
 print(myTuple)
+if 7 in myTuple:
+    print("Szerpel benne 7-es.")
+else:
+    print("Nem szerepel benne 7-es.")
 
 # 2. feladat: Határozzuk meg a tuple elemeinek összegét
+összeg = 0
+for item in myTuple:
+    összeg += item
+print("Az elemek összege:", összeg)
 
 # 3. feladat: Töröljük a listából azokat az elemeket amik nem tuple-ök
 lista = [5, (3, 2, 1), 4.13, ("asd", "fa"), "cica", True, None, (1, "egy almafa")]
+new_lista = []
+for i in range(len(lista)):
+    if type(lista[i]) == tuple:
+        new_lista.append(lista[i])
+lista = new_lista.copy()
+print(lista)
 
 # 4. feladat: Határozzuk meg a tuple elemeinek az átlagát
 myTuple = ((1,2,3), (43, 13), (9, 3, 8), (20, 40, 60))
 print(myTuple)
+
+összeg = 0
+darab = 0
+for i in range(len(myTuple)):
+    for j in range(len(myTuple[i])):
+        összeg += myTuple[i][j]
+        darab += 1
+        
+print("Az elemek átlaga:", round(összeg / darab, 2))
