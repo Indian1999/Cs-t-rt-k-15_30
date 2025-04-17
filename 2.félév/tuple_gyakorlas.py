@@ -29,8 +29,41 @@ for item in eredmények: # példa: item = (43, 2)
     
 print(f"A dolgozatok átlag eredménye: {round(százalék_összeg / len(eredmények), 2)}%")
 print(f"Az osztályzatok átlaga: {round(osztályzat_összeg / len(eredmények), 2)}")
-# 3. feladat: Számoljuk meg, hogy melyik osztályzatból hány darab született
 
+# 3. feladat: Számoljuk meg, hogy melyik osztályzatból hány darab született
+számláló_lista = ["buffer", 0, 0, 0, 0, 0] # 1-es indexen az 1-eseket számolom
+
+for item in eredmények:
+    számláló_lista[item[1]] += 1
+
+print(számláló_lista)
+for i in range(1, 6):
+    print(f"{i} darabszáma: {számláló_lista[i]}")
 
 # 4. feladat: Írjuk ki, a legjobb a legrosszabb eredményt
+min_index = 0
+max_index = 0
+for i in range(len(eredmények)):
+    if eredmények[i][0] > eredmények[max_index][0]:
+        max_index = i
+    if eredmények[i][0] < eredmények[min_index][0]:
+        min_index = i
+
+print(f"A legjobb eredmény: {eredmények[max_index]}")
+print(f"A legrosszabb eredmény: {eredmények[min_index]}")
+
+# Kitekintés a max/min függvényekre
+
+lista = [(random.randint(0,100),random.randint(0,100),random.randint(0,100)) for i in range(50)]
+print(lista)
+
+def sum_tuple(tup):
+    return tup[0] + tup[1] + tup[2]
+
+def polynom_tuple(tup):
+    return tup[0]**(11/10) + tup[1] - tup[2]
+
+print(max(lista, key=sum_tuple))
+print(max(lista, key=polynom_tuple))
+print(max(lista))
         
