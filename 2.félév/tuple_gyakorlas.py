@@ -79,3 +79,11 @@ def tavolsag(tup):
 
 legközelebbi_pont = min(pont_lista, key=tavolsag)
 print(f"A {pont} ponthoz legközelebbi másik pont: {legközelebbi_pont}")
+
+# Rendezzük ezt a pont_listát aszerint növekvő sorrendbe, hogy melyik van legközelebb a megadott ponthoz
+pont_lista.sort(key = tavolsag)
+print(pont_lista)
+
+# Rendezzük a listában található pontokat aszerint, csökkenő sorrendben, hogy melyik van a legtávolabb az origótól
+pont_lista.sort(key = lambda x: x[0]**2 + x[1]**2, reverse = True)
+print(pont_lista)
