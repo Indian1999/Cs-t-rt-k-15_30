@@ -23,7 +23,14 @@ print(eredmények)
 # 2. b, feladat: Határozzuk meg az osztályzatok átlagot 
 százalék_összeg = 0
 osztályzat_összeg = 0
+for item in eredmények: # példa: item = (43, 2)
+    százalék_összeg += item[0]
+    osztályzat_összeg += item[1]
+    
+print(f"A dolgozatok átlag eredménye: {round(százalék_összeg / len(eredmények), 2)}%")
+print(f"Az osztályzatok átlaga: {round(osztályzat_összeg / len(eredmények), 2)}")
 # 3. feladat: Számoljuk meg, hogy melyik osztályzatból hány darab született
+
 
 # 4. feladat: Írjuk ki, a legjobb a legrosszabb eredményt
         
