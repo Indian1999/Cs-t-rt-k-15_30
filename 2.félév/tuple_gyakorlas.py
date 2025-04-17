@@ -18,4 +18,12 @@ for item in százalékok:
         eredmények.append((item, 1))
         
 print(eredmények)
+
+# 2. a, feladat: Határozzuk meg az százalékos eredmények átlagát
+# 2. b, feladat: Határozzuk meg az osztályzatok átlagot 
+százalék_összeg = 0
+osztályzat_összeg = 0
+# 3. feladat: Számoljuk meg, hogy melyik osztályzatból hány darab született
+
+# 4. feladat: Írjuk ki, a legjobb a legrosszabb eredményt
         
