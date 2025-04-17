@@ -67,3 +67,15 @@ print(max(lista, key=sum_tuple))
 print(max(lista, key=polynom_tuple))
 print(max(lista))
         
+# feladat: Adott egy lista, ami pontokat tartalmaz (derékszögű rendszerben)  (-3, 5)
+
+pont_lista = [(random.randint(-10, 10), random.randint(-10,10)) for i in range(10)]
+print(pont_lista)
+
+pont = (6, -7) # Keressük meg ehez a ponthoz legközelebb lévő másik pontot
+
+def tavolsag(tup):
+    return ((tup[0] - pont[0])**2 + (tup[1] - pont[1])**2 )**(1/2)
+
+legközelebbi_pont = min(pont_lista, key=tavolsag)
+print(f"A {pont} ponthoz legközelebbi másik pont: {legközelebbi_pont}")
