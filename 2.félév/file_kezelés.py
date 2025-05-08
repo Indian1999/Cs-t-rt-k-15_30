@@ -103,3 +103,31 @@ for i in range(len(nevek)):
     f.write(f"{nevek[i]};{életkorok[i]};{osztályzatok[i]};{sport[i]}\n")
 
 f.close()
+
+# Feladat: Olvassuk be az autok.csv fájl tartalmát, és mentsük el az 
+# adatokat egy megfelelő adatszerkezetben
+
+f = open("autok.csv", "r", encoding="utf-8")
+rendszámok = []
+gyártók = []
+lóerők = []
+# string.strip() - eltünteti a whitespaceket (szóköz, enter), a string elejéről
+# és végéreől
+# string.split(";") - ; -ők mentén feldarabolja a stringet egy listába
+for line in f:
+    sor = line.strip().split(";")  # ['VRO-121', 'Peugeot', '1450']
+    rendszámok.append(sor[0])
+    gyártók.append(sor[1])
+    lóerők.append(sor[2])
+
+f.close()
+print(rendszámok)
+print(gyártók)
+print(lóerők)
+
+# konteksztus manager
+
+with open("osztaly.csv", "r", encoding="utf-8") as f:
+    print(f.read(20))
+
+f.read(30)
