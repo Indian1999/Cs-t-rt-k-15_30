@@ -18,3 +18,53 @@ f.close()
 
 #############################################################
 
+f = open("input.txt", "r", encoding = "utf-8")
+
+sorok = []
+for line in f:
+    sorok.append(line)
+print(sorok)
+
+f.close()
+
+#############################################################
+
+f = open("input.txt", "r", encoding = "utf-8")
+
+sorok = f.readlines()
+print(sorok)
+
+f.close()
+
+#############################################################
+#                       Fájlba írás                         #
+#############################################################
+
+f = open("output.txt", "w", encoding = "utf-8")
+
+f.write("Szia!\n")
+f.write("Hello!")
+
+f.close()
+
+# A w mód, az mindig létrehoz egy új fájlt, ha volt már ilyen nevű, akkor törli a tartalmát
+
+f = open("output.txt", "w", encoding = "utf-8")
+
+f.write("Hello there!\n")
+f.write("General Kenobi!")
+
+f.close()
+
+# Az a mód (append), nem törli a fájlnak a tartalmát, hanem a végéről elkezdhetünk új tartalmat belerakni
+f = open("output.txt", "a", encoding = "utf-8")
+
+f.write("\nMay the 4th be with you!")
+
+f.close()
+#################################################################
+f = open("input.txt", "a", encoding = "utf-8")
+
+f.write("\nCsudijó mese volt ez!")
+
+f.close()
