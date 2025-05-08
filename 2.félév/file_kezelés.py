@@ -63,10 +63,25 @@ f.write("\nMay the 4th be with you!")
 
 f.close()
 #################################################################
-f = open("input.txt", "r", encoding = "utf-8")
+f = open("input.txt", "a", encoding = "utf-8")
 
 f.write("\nCsudijó mese volt ez!")
 
 f.close()
 
 #################################################################
+
+f = open("input.txt", "a+", encoding="utf-8")
+
+print(f.read(20)) # A végéről indul, úgyhogy nem olvas be semmit
+f.write("Szia!")
+
+f.close()
+
+#################################################################
+f = open("input.txt", "r+", encoding="utf-8")
+
+print(f.read(20)) 
+f.write("Szia!")
+
+f.close()
