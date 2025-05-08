@@ -1,3 +1,4 @@
+"""
 f = open("input.txt", "r", encoding="utf-8")
 
 print(f.read(50))
@@ -83,5 +84,22 @@ f = open("input.txt", "r+", encoding="utf-8")
 
 print(f.read(20)) 
 f.write("Szia!")
+
+f.close()
+"""
+###############################################################
+
+nevek = ["András", "Péter", "Béla", "Cecil", "Hugó", "Dóra", "Ábel", "Domonkos"]
+életkorok = [18, 12, 9, 13, 30, 21, 17, 15]
+osztályzatok = [3, 5, 4, 2, 1, 2, 4, 3]
+sport = ["Foci", "Tenisz", "Kosárlabda", "Foci", "Golf", "Floorball", "Röplabda", "Foci"]
+
+# Mentsük el ezeket az adatokat egy csv fájlba!
+# csv = comma seperated value (Vesszővel elválasztott értékek)
+
+f = open("osztaly.csv", "w", encoding="utf-8")
+
+for i in range(len(nevek)):
+    f.write(f"{nevek[i]};{életkorok[i]};{osztályzatok[i]};{sport[i]}\n")
 
 f.close()
