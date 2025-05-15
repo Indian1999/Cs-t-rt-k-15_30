@@ -27,6 +27,18 @@ max_row = data[data["Age"] == max_age]
 max_name = max_row.iloc[0, 3].replace('"', '').strip()
 print(f"A legidősebb nyertes {max_name} volt. {max_age} évesen nyerte a díjat.")
 
+# Másik megoldás
+max_index = data["Age"].argmax() # Legnagyobb elem indexe
+max_name = data.iloc[max_index, 3].replace('"', '').strip()
+max_age = data.iloc[max_index, 2]
+print(f"A legidősebb nyertes {max_name} volt. {max_age} évesen nyerte a díjat.")
+
 # Keressük meg, hogy mikor nyert a Fargo című film!
+találatok = data[data["Movie"].str.contains("Fargo")]
+print(találatok[["Year", "Movie"]])
 
 # Ki nyerte a legtöbb díjat?
+most_frequent_name = data["Name"].value_counts().idxmax()
+frequency = data["Name"].value_counts().max()
+print(f"A legtöbb Oscart {most_frequent_name} nyerte. Összesen {frequency} alkalommal.")
+
