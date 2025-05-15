@@ -42,3 +42,33 @@ most_frequent_name = data["Name"].value_counts().idxmax()
 frequency = data["Name"].value_counts().max()
 print(f"A legtöbb Oscart {most_frequent_name} nyerte. Összesen {frequency} alkalommal.")
 
+# Ábrázoljuk egy scatter-plot-on, az oscar nyerteseket age és évszám szempontból
+
+data = pd.read_csv("oscar_age_female.csv", usecols = ["Year", "Age"])
+plt.scatter(data["Year"], data["Age"])
+plt.title("Életkor-évszám diagramm")
+plt.xlabel("Évszám")
+plt.ylabel("Életkor")
+plt.close()
+
+# Ábrázoljuk egy kördiagrammon, hogy az egyes életkorok milyen sűrűn nyertek oscart!
+
+counts = data["Age"].value_counts()
+counts = counts.head(10)
+
+explode_list = [0.1 for i in range(len(counts))]
+explode_list[0] = 0.1
+
+plt.pie(counts, labels=counts.index, autopct="%1.1f%%", explode=explode_list)
+plt.close()
+
+# Határozzuk meg a magánhangzók sűrűségét!
+
+letters = pd.read_csv("letter_frequency.csv", skipinitialspace=True)
+vowels = "AEUIO"
+vowel_count = 0
+for index, row in letters.iterrows():
+    if row["Letter"] in vowels:
+        vowel_count += row["Percentage"]
+print(f"A betűk {round(vowel_count, 2)}%-a magánhangzó.")
+
