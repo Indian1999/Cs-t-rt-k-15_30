@@ -83,3 +83,16 @@ print(library["Place of Publication"])
 place_names = library["Place of Publication"].str.extract(r'^"?([A-Za-zΑ-Ωα-ωА-Яа-яЁё]+)')
 library["Place of Publication"] = place_names[0]
 print(library["Place of Publication"])
+
+# Mostmár tiszták az adatok
+
+#Listázzuk ki azokat a könyveket amik szentpéterváron lettek kiadva
+
+saintpetersburg = library[library["Place of Publication"] == "Санктпетербургъ"]
+print(saintpetersburg[["Place of Publication", "Date of Publication"]])
+
+#Listázzuk ki azokat a könyveket amik Londonban lettek kiadva 1892-ben
+
+london_1892 = library[library["Place of Publication"] == "London"]
+london_1892 = london_1892[london_1892["Date of Publication"] == 1892]
+print(london_1892)
