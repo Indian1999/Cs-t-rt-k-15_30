@@ -47,3 +47,39 @@ print(library["Date of Publication"])
 print("Null értékek száma a Date of Publication oszlopban:", library["Date of Publication"].isnull().sum())
 
 # Ezekkel megoldottuk, hogy a Date of Publication oszlop tiszta adatokat tartalmazzon
+
+#############################################################
+#             Place of Publication tisztítása               #
+#############################################################
+
+unique_places = library["Place of Publication"].value_counts()
+print(unique_places.head(20))
+
+london = library["Place of Publication"].str.contains("London")
+paris = library["Place of Publication"].str.contains("Paris")
+edinburgh = library["Place of Publication"].str.contains("Edinburgh")
+new_york = library["Place of Publication"].str.contains("New York")
+leipzig = library["Place of Publication"].str.contains("Leipzig")
+phili = library["Place of Publication"].str.contains("Philadelphia")
+
+library["Place of Publication"] = np.where(london, "London", library["Place of Publication"])
+library["Place of Publication"] = np.where(paris, "Paris", library["Place of Publication"])
+library["Place of Publication"] = np.where(edinburgh, "Edinburgh", library["Place of Publication"])
+library["Place of Publication"] = np.where(new_york, "New York", library["Place of Publication"])
+library["Place of Publication"] = np.where(leipzig, "Leipzig", library["Place of Publication"])
+library["Place of Publication"] = np.where(phili, "Philadelphia", library["Place of Publication"])
+
+print(library["Place of Publication"])
+# alt gr + 3 (duplán megnyomva) -> ^^
+
+# ^     - A string elejét
+# "?    - Lehet van az elején idézőjel, lehet nincs
+# ()    - Capture group, ami zárójelen belül van, az el lesz mentve
+# \p{L} - egy bármilyen unicode betű
+# \p{N} - egy bármilyen unicode számjegy
+# +     - Egy vagy több ilyen karakter
+# *     - Valahány valamilyen karakter
+
+place_names = library["Place of Publication"].str.extract(r'^"?([A-Za-zΑ-Ωα-ωА-Яа-яЁё]+)')
+library["Place of Publication"] = place_names[0]
+print(library["Place of Publication"])
