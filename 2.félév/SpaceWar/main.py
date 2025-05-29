@@ -32,15 +32,37 @@ YELLOW_SPACESHIP = pygame.image.load(os.path.join(ASSETS_PATH, "spaceship_yellow
 YELLOW_SPACESHIP = pygame.transform.scale(YELLOW_SPACESHIP, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 YELLOW_SPACESHIP = pygame.transform.rotate(YELLOW_SPACESHIP, 270)
 
-def draw_frame():
+def draw_frame(red, yellow):
     window.blit(BACKGROUND, (0,0))
     
-    window.blit(RED_SPACESHIP, (675, 250))
-    window.blit(YELLOW_SPACESHIP, (225, 250))
+    window.blit(RED_SPACESHIP, (red.x, red.y))
+    window.blit(YELLOW_SPACESHIP, (yellow.x, yellow.y))
     
     pygame.display.update() # frissíti a megjelenítést
 
+def red_control(keys_pressed, red):
+    if keys_pressed[pygame.K_LEFT] and red.x >= WIDTH // 2:
+        red.x -= VELOCITY
+    if keys_pressed[pygame.K_RIGHT] and red.x <= WIDTH - SPACESHIP_WIDTH:
+        red.x += VELOCITY
+    if keys_pressed[pygame.K_UP] and red.y >= 0:
+        red.y -= VELOCITY
+    if keys_pressed[pygame.K_DOWN] and red.y <= HEIGHT - SPACESHIP_HEIGHT:
+        red.y += VELOCITY
+
+def yellow_control(keys_pressed, yellow):
+    if keys_pressed[pygame.K_a] and yellow.x >= 0:
+        yellow.x -= VELOCITY
+    if keys_pressed[pygame.K_d] and yellow.x <= WIDTH // 2 - SPACESHIP_WIDTH:
+        yellow.x += VELOCITY
+    if keys_pressed[pygame.K_w] and yellow.y >= 0:
+        yellow.y -= VELOCITY
+    if keys_pressed[pygame.K_s] and yellow.y <= HEIGHT - SPACESHIP_HEIGHT:
+        yellow.y += VELOCITY
+
 def main():
+    red = pygame.Rect(WIDTH - 150, HEIGHT // 2 - SPACESHIP_HEIGHT // 2, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
+    yellow = pygame.Rect(150 - SPACESHIP_WIDTH, HEIGHT // 2 - SPACESHIP_HEIGHT // 2, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
     while True:
         clock.tick(FPS) # FPS = 60 -> 1 másodperc 60-ad részét 'várakozunk'
         for event in pygame.event.get():
@@ -48,7 +70,10 @@ def main():
                 pygame.quit()
                 exit()
         
-        draw_frame()
+        keys_pressed = pygame.key.get_pressed()
+        red_control(keys_pressed, red)
+        yellow_control(keys_pressed, yellow)
+        draw_frame(red, yellow)
         
 # Ez a program belépési pontja
 if __name__ == "__main__":
