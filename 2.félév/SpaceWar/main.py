@@ -89,12 +89,26 @@ def handle_bullets(red_bullets, yellow_bullets, red, yellow):
         if yellow.colliderect(bullet):
             pygame.event.post(pygame.event.Event(YELLOW_HIT))
             red_bullets.remove(bullet)
+        if bullet.x < 0 - BULLET_WIDTH:
+            red_bullets.remove(bullet)
         
     for bullet in yellow_bullets:
         bullet.x += BULLET_VELOCITY
         if red.colliderect(bullet):
             pygame.event.post(pygame.event.Event(RED_HIT))
             yellow_bullets.remove(bullet)
+        if bullet.x > WIDTH:
+            yellow_bullets.remove(bullet)
+    
+def draw_winner(text):
+    font = pygame.font.SysFont("Arial", 40)
+    winner_text = font.render(text, True, (255, 255, 255))
+    window.blit(winner_text,
+                (WIDTH // 2 - winner_text.get_width() // 2,
+                 HEIGHT // 2 - winner_text.get_height() //2)
+                )
+    pygame.display.update()
+    pygame.time.delay(5000)
     
 def main():
     red = pygame.Rect(WIDTH - 150, HEIGHT // 2 - SPACESHIP_HEIGHT // 2, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
@@ -113,13 +127,13 @@ def main():
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LCTRL:
+                if event.key == pygame.K_LCTRL and len(yellow_bullets) < 3:
                     bullet = pygame.Rect(yellow.x + SPACESHIP_WIDTH, 
                                          yellow.y + SPACESHIP_HEIGHT // 2 - BULLET_HEIGHT // 2, 
                                          BULLET_WIDTH, BULLET_HEIGHT)
                     yellow_bullets.append(bullet)
                     FIRE_SOUND.play()
-                if event.key == pygame.K_RCTRL:
+                if event.key == pygame.K_RCTRL and len(red_bullets) < 3:
                     bullet = pygame.Rect(red.x, 
                                          red.y + SPACESHIP_HEIGHT // 2 - BULLET_HEIGHT // 2,
                                          BULLET_WIDTH, BULLET_HEIGHT)
@@ -137,6 +151,13 @@ def main():
         yellow_control(keys_pressed, yellow)
         handle_bullets(red_bullets, yellow_bullets, red, yellow)
         draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health)
+        
+        if red_health <= 0:
+            draw_winner("Yellow Wins!")
+            break
+        if yellow_health <= 0:
+            draw_winner("Red Wins!")
+            break
         
 # Ez a program belépési pontja
 if __name__ == "__main__":
