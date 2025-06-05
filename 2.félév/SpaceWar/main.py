@@ -2,6 +2,8 @@ import pygame # pip install pygame
 import os # Elérési útvonalakat tudjuk jól kezelni
 import math
 import random
+pygame.mixer.init()
+pygame.font.init()
 
 # Ha egy változó csupa nagybetű, akkor azzal jelezzük, hogy ez egy konstans
 # A konstansoknak nem változtatunk az értékén
@@ -14,6 +16,8 @@ VELOCITY = 5 # Az  úrhajók sebessége (pixel per frame)
 BULLET_WIDTH = 10
 BULLET_HEIGHT = 5
 BULLET_VELOCITY = 8
+
+HEALTH_FONT = pygame.font.SysFont("Arial", 24)
 
 RED_HIT = pygame.USEREVENT + 1
 YELLOW_HIT = pygame.USEREVENT + 2
@@ -41,11 +45,16 @@ YELLOW_SPACESHIP = pygame.image.load(os.path.join(ASSETS_PATH, "spaceship_yellow
 YELLOW_SPACESHIP = pygame.transform.scale(YELLOW_SPACESHIP, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 YELLOW_SPACESHIP = pygame.transform.rotate(YELLOW_SPACESHIP, 270)
 
-def draw_frame(red, yellow, red_bullets, yellow_bullets):
+def draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health):
     window.blit(BACKGROUND, (0,0))
     
     window.blit(RED_SPACESHIP, (red.x, red.y))
     window.blit(YELLOW_SPACESHIP, (yellow.x, yellow.y))
+    
+    red_health_text = HEALTH_FONT.render("Health: " + str(red_health), True, (255, 255, 255))
+    yellow_health_text = HEALTH_FONT.render("Health: " + str(yellow_health), True, (255, 255, 255))
+    window.blit(red_health_text, (WIDTH - red_health_text.get_width() - 10, 10))
+    window.blit(yellow_health_text, (10, 10))
     
     for bullet in red_bullets:
         pygame.draw.rect(window, (255, 0, 0), bullet)
@@ -127,7 +136,7 @@ def main():
         red_control(keys_pressed, red)
         yellow_control(keys_pressed, yellow)
         handle_bullets(red_bullets, yellow_bullets, red, yellow)
-        draw_frame(red, yellow, red_bullets, yellow_bullets)
+        draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health)
         
 # Ez a program belépési pontja
 if __name__ == "__main__":
