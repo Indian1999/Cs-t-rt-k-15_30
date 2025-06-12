@@ -45,7 +45,43 @@ YELLOW_SPACESHIP = pygame.image.load(os.path.join(ASSETS_PATH, "spaceship_yellow
 YELLOW_SPACESHIP = pygame.transform.scale(YELLOW_SPACESHIP, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 YELLOW_SPACESHIP = pygame.transform.rotate(YELLOW_SPACESHIP, 270)
 
-def draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health):
+# class-on belül lévő függvények első paramétere: self
+# self - meteorra utal (c# -ban a this)
+class Meteor:
+    # Konstruktór függvénynek, akkor fut le amikor létrehozunk egy meteort
+    def __init__(self):
+        MARGIN = 150
+        METEOR_SIZE = 50
+        x = random.randint(-MARGIN, WIDTH + MARGIN)
+        y = random.randint(-MARGIN, HEIGHT + MARGIN)
+        while x > 0 and x < WIDTH and y > 0 and y < HEIGHT:
+            x = random.randint(-MARGIN, WIDTH + MARGIN)
+            y = random.randint(-MARGIN, HEIGHT + MARGIN)   
+        self.pos = (x,y)
+        self.image = pygame.image.load(os.path.join(ASSETS_PATH, "meteor.png"))
+        self.image = pygame.transform.scale(self.image, (METEOR_SIZE, METEOR_SIZE))
+        self.image = pygame.transform.rotate(self.image, 90)
+        self.rect = pygame.Rect(self.pos[0], self.pos[1], METEOR_SIZE, METEOR_SIZE)
+        self.new_direction()
+    
+    def new_direction(self):
+        x = random.randint(100, WIDTH-100)
+        y = random.randint(100, HEIGHT-100)
+        v_x = x - self.pos[0]
+        v_y = y - self.pos[1]
+        v_length = (v_x**2 + v_y**2)**0.5 # feledik hatvány = gyökvonás
+        self.x_vel = v_x / v_length
+        self.y_vel = v_y / v_length
+        
+    def move(self):
+        self.pos = (self.pos[0] + self.x_vel, self.pos[1] + self.y_vel)
+        self.rect.x = self.pos[0]
+        self.rect.y = self.pos[1]
+        if self.rect.x < -150 or self.rect.x > WIDTH + 150 or self.rect.y < -150 or self.rect.y > HEIGHT + 150:
+            self.new_direction()
+
+
+def draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health, meteors):
     window.blit(BACKGROUND, (0,0))
     
     window.blit(RED_SPACESHIP, (red.x, red.y))
@@ -60,6 +96,9 @@ def draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_heal
         pygame.draw.rect(window, (255, 0, 0), bullet)
     for bullet in yellow_bullets:
         pygame.draw.rect(window, (255, 255, 0), bullet)
+        
+    for meteor in meteors:
+        window.blit(meteor.image, meteor.rect)
     
     pygame.display.update() # frissíti a megjelenítést
 
@@ -120,6 +159,10 @@ def main():
     red_health = 10
     yellow_health = 10
     
+    meteors = []
+    for i in range(3):
+        meteors.append(Meteor())
+    
     while True:
         clock.tick(FPS) # FPS = 60 -> 1 másodperc 60-ad részét 'várakozunk'
         for event in pygame.event.get():
@@ -150,7 +193,9 @@ def main():
         red_control(keys_pressed, red)
         yellow_control(keys_pressed, yellow)
         handle_bullets(red_bullets, yellow_bullets, red, yellow)
-        draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health)
+        for meteor in meteors:
+            meteor.move()
+        draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health, meteors)
         
         if red_health <= 0:
             draw_winner("Yellow Wins!")
