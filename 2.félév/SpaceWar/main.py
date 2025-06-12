@@ -16,6 +16,7 @@ VELOCITY = 5 # Az  úrhajók sebessége (pixel per frame)
 BULLET_WIDTH = 10
 BULLET_HEIGHT = 5
 BULLET_VELOCITY = 8
+METEOR_VELOCITY = 3
 
 HEALTH_FONT = pygame.font.SysFont("Arial", 24)
 
@@ -70,8 +71,8 @@ class Meteor:
         v_x = x - self.pos[0]
         v_y = y - self.pos[1]
         v_length = (v_x**2 + v_y**2)**0.5 # feledik hatvány = gyökvonás
-        self.x_vel = v_x / v_length
-        self.y_vel = v_y / v_length
+        self.x_vel = v_x / v_length * METEOR_VELOCITY
+        self.y_vel = v_y / v_length * METEOR_VELOCITY
         
     def move(self):
         self.pos = (self.pos[0] + self.x_vel, self.pos[1] + self.y_vel)
@@ -122,7 +123,7 @@ def yellow_control(keys_pressed, yellow):
     if keys_pressed[pygame.K_s] and yellow.y <= HEIGHT - SPACESHIP_HEIGHT:
         yellow.y += VELOCITY
 
-def handle_bullets(red_bullets, yellow_bullets, red, yellow):
+def handle_bullets(red_bullets, yellow_bullets, red, yellow, meteors):
     for bullet in red_bullets:
         bullet.x -= BULLET_VELOCITY
         if yellow.colliderect(bullet):
@@ -138,6 +139,16 @@ def handle_bullets(red_bullets, yellow_bullets, red, yellow):
             yellow_bullets.remove(bullet)
         if bullet.x > WIDTH:
             yellow_bullets.remove(bullet)
+            
+    for meteor in meteors:
+        if red.colliderect(meteor.rect):
+            pygame.event.post(pygame.event.Event(RED_HIT))
+            meteors.remove(meteor)
+            meteors.append(Meteor())
+        if yellow.colliderect(meteor.rect):
+            pygame.event.post(pygame.event.Event(YELLOW_HIT))
+            meteors.remove(meteor)
+            meteors.append(Meteor())
     
 def draw_winner(text):
     font = pygame.font.SysFont("Arial", 40)
@@ -192,7 +203,7 @@ def main():
         keys_pressed = pygame.key.get_pressed()
         red_control(keys_pressed, red)
         yellow_control(keys_pressed, yellow)
-        handle_bullets(red_bullets, yellow_bullets, red, yellow)
+        handle_bullets(red_bullets, yellow_bullets, red, yellow, meteors)
         for meteor in meteors:
             meteor.move()
         draw_frame(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health, meteors)
